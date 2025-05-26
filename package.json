@@ -2,8 +2,11 @@
   "name": "moj-projekt-z-tailwindem",
   "version": "1.0.0",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/input.css -o ./src/output.css",
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
