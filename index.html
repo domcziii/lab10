@@ -2,19 +2,34 @@
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/src/styles.css" rel="stylesheet">
-    <title>Vite App</title>
+    <title>Artykuły</title>
   </head>
   <body>
-    <div id="app"></div>
+    
     <script type="module" src="/src/main.js"></script>
-    <h1 class="text-2xl font-bold">
-      Artykuły
-    </h1>
-    <button class="bg-blue-300 p-4">
-      count
-    </button>
+
+    <h1 class="text-2xl font-bold">Lista artykułów:</h1>
+    <div id="articles"></div>
+
+    <h2>Dodaj nowy artykuł</h2>
+
+    <form id="articlesForms">
+      <label for="titlef">Tytuł:</label>
+      <input type="text" id ="titlef" name="title"> </input>
+
+      <label for="subtitlef">Podtytuł:</label>
+      <input type="text" id ="subtitlef" name="subtitle"> </input>
+
+      <label for="authorf">Autor:</label>
+      <input type="text" id ="authorf" name="author"> </input>
+
+      <label for="contentf">Treść:</label>
+      <input type="text" id ="contentf" name="content"> </input>
+
+      <button type="submit">Dodaj artykuł</button>
+    </form>
   </body>
 </html>
+

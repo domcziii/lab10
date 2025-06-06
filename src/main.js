@@ -1,30 +1,84 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
-const response = fetch('<https://bhkmazgvcrgqejvvmqmy.supabase.co>', {
+const fetchArticles = async () => {
+ try {
+ const response = await fetch(
+ '<https://bhkmazgvcrgqejvvmqmy.supabase.co>', {
  headers: {
  apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJoa21hemd2Y3JncWVqdnZtcW15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc2NTM5NjAsImV4cCI6MjA2MzIyOTk2MH0.7PT8Y-oEaOLRjMUz2Vc4IL7Mh1bGNzLqK-2k1lx98Lk',
  },
-});
-console.log(response);
+ });
+ const data = await response.json();
+ console.log(data);
+ return data;
+ } catch (error) {
+ console.error('Fetch error:', error);
+ }
+};
 
-setupCounter(document.querySelector('#counter'))
+const displayArticles = (articles) => {
+  const container = document.getElementById('articles')
+  container.innerHTML = '';
+
+  articles.forEach(({ title, subtitle, author, created_at, content }) => {
+    const articleEl = document.createElement('article');
+    articleEl.innerHTML = `
+      <h2>${title}</h2>
+      <h3>${subtitle}</h3>
+      <p><strong>Autor:</strong> ${author}</p>
+      <p><em>Data utworzenia: ${new Date(created_at).toLocaleString()}</em></p>
+      <p>${content}</p>
+      <hr />
+    `;
+    container.appendChild(articleEl);
+  });
+};
+
+const createNewArticle = async (article) => {
+ try {
+ const response = await fetch('https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/articles',
+{
+ method: 'POST',
+ headers: {
+ apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJoa21hemd2Y3JncWVqdnZtcW15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc2NTM5NjAsImV4cCI6MjA2MzIyOTk2MH0.7PT8Y-oEaOLRjMUz2Vc4IL7Mh1bGNzLqK-2k1lx98Lk',
+ 'Content-Type' : 'application/json' ,
+ },
+ body: JSON.stringify(article),
+ });
+
+ if (response.status !== 201) {
+ throw new Error(`Status: ${response.status}`);
+ }
+ } catch (error) {
+ console.error('Fetch error:' , error);
+ }
+};
+
+const form = document.getElementById('articlesForms');
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+const newArticle = {
+    title: form.title.value.trim(),
+    subtitle: form.subtitle.value.trim(),
+    author: form.author.value.trim(),
+    content: form.content.value.trim(),
+    created_at: new Date().toISOString(),
+  };
+
+  // Wysyłamy artykuł do Supabase
+  await createNewArticle(newArticle);
+
+  // Odświeżamy listę artykułów
+  const articles = await fetchArticles();
+  displayArticles(articles);
+
+  // Czyścimy formularz
+  form.reset();
+});
+
+(async () => {
+  const articles = await fetchArticles();
+  displayArticles(articles);
+})();
