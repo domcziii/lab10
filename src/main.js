@@ -1,10 +1,25 @@
 import './style.css';
 import { format } from 'date-fns';
 
+function sortArticles() {
+  const sortType = document.getElementById("sort");
+  sortType.addEventListener('change', (e) => {
+    if(value = 'date_ascending') {
+      const url = 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*&order=created_at.asc';
+    }
+    else if(value = 'date_descending') {
+      const url = 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*&order=created_at.desc';
+    }
+    else if(value="alphabetically") {
+      const url = 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*&order=title.asc';
+    }
+  })
+}
+
 const fetchArticles = async () => {
  try {
  const response = await fetch(
- 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*', {
+ url, {
  headers: {
  apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJoa21hemd2Y3JncWVqdnZtcW15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc2NTM5NjAsImV4cCI6MjA2MzIyOTk2MH0.7PT8Y-oEaOLRjMUz2Vc4IL7Mh1bGNzLqK-2k1lx98Lk',
  },
@@ -79,3 +94,4 @@ const newArticle = {
   const articles = await fetchArticles();
   displayArticles(articles);
 })();
+
