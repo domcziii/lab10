@@ -27,7 +27,7 @@ const displayArticles = (articles) => {
       <h2>${title}</h2>
       <h3>${subtitle}</h3>
       <p>Autor:${author}</p>
-      <p>Data utworzenia:${new Date(created_at).toLocaleString()}</p>
+      <p>Data utworzenia:${format(new Date(created_at).toLocaleString(), 'DD-MM-YYYY')}</p>
       <p>${content}</p>
       <hr />
     `;
