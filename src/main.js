@@ -1,4 +1,5 @@
-import './style.css'
+import './style.css';
+import { format } from 'date-fns';
 
 const fetchArticles = async () => {
  try {
@@ -6,7 +7,6 @@ const fetchArticles = async () => {
  'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*', {
  headers: {
  apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJoa21hemd2Y3JncWVqdnZtcW15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc2NTM5NjAsImV4cCI6MjA2MzIyOTk2MH0.7PT8Y-oEaOLRjMUz2Vc4IL7Mh1bGNzLqK-2k1lx98Lk',
- Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJoa21hemd2Y3JncWVqdnZtcW15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc2NTM5NjAsImV4cCI6MjA2MzIyOTk2MH0.7PT8Y-oEaOLRjMUz2Vc4IL7Mh1bGNzLqK-2k1lx98Lk',
  },
  });
  const data = await response.json();
@@ -27,7 +27,7 @@ const displayArticles = (articles) => {
       <h2>${title}</h2>
       <h3>${subtitle}</h3>
       <p>Autor:${author}</p>
-      <p>Data utworzenia:${format(new Date(created_at).toLocaleString(), 'DD-MM-YYYY')}</p>
+      <p>Data utworzenia:${format(new Date(created_at), 'DD-MM-YYYY')}</p>
       <p>${content}</p>
       <hr />
     `;
@@ -43,7 +43,6 @@ const createNewArticle = async (article) => {
  headers: {
  apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJoa21hemd2Y3JncWVqdnZtcW15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc2NTM5NjAsImV4cCI6MjA2MzIyOTk2MH0.7PT8Y-oEaOLRjMUz2Vc4IL7Mh1bGNzLqK-2k1lx98Lk',
  'Content-Type' : 'application/json' ,
-  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJoa21hemd2Y3JncWVqdnZtcW15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc2NTM5NjAsImV4cCI6MjA2MzIyOTk2MH0.7PT8Y-oEaOLRjMUz2Vc4IL7Mh1bGNzLqK-2k1lx98Lk',
  },
  body: JSON.stringify(article),
  });
