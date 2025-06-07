@@ -1,20 +1,28 @@
 import './style.css';
 import { format } from 'date-fns';
 
-function sortArticles() {
-  const sortType = document.getElementById("sort");
-  sortType.addEventListener('change', (e) => {
-    if(value = 'date_ascending') {
-      const url = 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*&order=created_at.asc';
+let url = 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*';
+
+document.getElementById('sort').addEventListener('change', async (e) => {
+  const value =e.target.value;
+
+    if(value == 'date_ascending') {
+      url = 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*&order=created_at.asc';
     }
-    else if(value = 'date_descending') {
-      const url = 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*&order=created_at.desc';
+    else if(value == 'date_descending') {
+      url = 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*&order=created_at.desc';
     }
-    else if(value="alphabetically") {
-      const url = 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*&order=title.asc';
+    else if(value == "alphabetically") {
+      url = 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*&order=title.asc';
     }
-  })
-}
+    else {
+      url = 'https://bhkmazgvcrgqejvvmqmy.supabase.co/rest/v1/article?select=*';
+    }
+
+    const articles = await fetchArticles();
+    displayArticles(articles);
+  });
+
 
 const fetchArticles = async () => {
  try {
