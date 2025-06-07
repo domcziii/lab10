@@ -3,3 +3,7 @@
 @theme {
     --color-primary: #ec4899
 }
+
+input {
+    display: block;
+}

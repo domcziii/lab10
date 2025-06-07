@@ -5,7 +5,7 @@ const fetchArticles = async () => {
  const response = await fetch(
  '<https://bhkmazgvcrgqejvvmqmy.supabase.co>', {
  headers: {
- apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJoa21hemd2Y3JncWVqdnZtcW15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc2NTM5NjAsImV4cCI6MjA2MzIyOTk2MH0.7PT8Y-oEaOLRjMUz2Vc4IL7Mh1bGNzLqK-2k1lx98Lk',
+ apiKey: '<eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJoa21hemd2Y3JncWVqdnZtcW15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc2NTM5NjAsImV4cCI6MjA2MzIyOTk2MH0.7PT8Y-oEaOLRjMUz2Vc4IL7Mh1bGNzLqK-2k1lx98Lk>',
  },
  });
  const data = await response.json();
@@ -25,8 +25,8 @@ const displayArticles = (articles) => {
     articleEl.innerHTML = `
       <h2>${title}</h2>
       <h3>${subtitle}</h3>
-      <p><strong>Autor:</strong> ${author}</p>
-      <p><em>Data utworzenia: ${new Date(created_at).toLocaleString()}</em></p>
+      <p>Autor:${author}</p>
+      <p>Data utworzenia:${new Date(created_at).toLocaleString()}</p>
       <p>${content}</p>
       <hr />
     `;
