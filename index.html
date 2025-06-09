@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/src/styles.css" rel="stylesheet">
+    <link href="./src/styles.css" rel="stylesheet">
     <title>Artykuły</title>
   </head>
   <body>
     
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="./src/main.js"></script>
 
     <h1 class="text-2xl font-bold">Lista artykułów:</h1>
 
@@ -25,17 +25,20 @@
     <h2>Dodaj nowy artykuł</h2>
 
     <form id="articlesForms">
-      <label for="titlef">Tytuł:</label>
+      <label for="title">Tytuł:</label>
       <input type="text" id ="title" name="title"/>
 
-      <label for="subtitlef">Podtytuł:</label>
+      <label for="subtitle">Podtytuł:</label>
       <input type="text" id ="subtitle" name="subtitle"/>
 
-      <label for="authorf">Autor:</label>
+      <label for="author">Autor:</label>
       <input type="text" id ="author" name="author"/>
 
-      <label for="contentf">Treść:</label>
+      <label for="content">Treść:</label>
       <input type="text" id ="content" name="content"/>
+
+      <label for="created_at">Data utworzenia artykułu:</label>
+      <input type="date" id="created_at" name="created_at"/>
 
       <button type="submit">Dodaj artykuł</button>
     </form>

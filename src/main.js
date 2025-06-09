@@ -88,7 +88,9 @@ const newArticle = {
     subtitle: form.subtitle.value.trim(),
     author: form.author.value.trim(),
     content: form.content.value.trim(),
-    created_at: new Date().toISOString(),
+    created_at: form.created_at.value
+    ? new Date(form.created_at.value).toISOString()
+    : new Date().toISOString(),
   };
 
   await createNewArticle(newArticle);
